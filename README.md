@@ -4,7 +4,7 @@ PHP SDK for integrating with the ProtegeId API (Age Verification).
 
 ## Requirements
 
-- PHP 8.2+
+- PHP 8.0+
 
 ## Installation
 

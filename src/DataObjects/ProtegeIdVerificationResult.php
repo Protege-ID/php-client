@@ -2,13 +2,11 @@
 
 namespace ProtegeId\DataObjects;
 
-use ProtegeId\Enums\ProtegeIdVerificationStatus;
-
 final class ProtegeIdVerificationResult
 {
     public function __construct(
-        public readonly string $userRef,
-        public readonly ProtegeIdVerificationStatus $status,
-        public readonly ?bool $ageVerified = null
+        public string $userRef,
+        public string $status,
+        public ?bool $ageVerified = null
     ) {}
 }
