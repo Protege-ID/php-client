@@ -1,3 +1,5 @@
+![ProtegeId Logo](assets/logotipo.png)
+
 # ProtegeId PHP SDK
 PHP SDK for integrating with the ProtegeId API (Age Verification).
 
