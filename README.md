@@ -1,6 +1,10 @@
 # ProtegeId PHP SDK
-
 PHP SDK for integrating with the ProtegeId API (Age Verification).
+
+[![codecov](https://codecov.io/gh/Protege-ID/php-client/branch/main/graph/badge.svg)](https://codecov.io/gh/Protege-ID/php-client)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg)](https://phpstan.org/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://www.php.net/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Requirements
 
@@ -60,8 +64,16 @@ Run the PHPCS code style checks:
 Run the PHPStan static analysis:
 
 ```bash
-vendor/bin/phpstan analyse src tests --level 5
+vendor/bin/phpstan analyse
 ```
+
+Generate code coverage (requires Xdebug or PCOV enabled):
+
+```bash
+composer test:coverage
+```
+
+The HTML report is generated in `build/coverage/`.
 
 ## License
 
