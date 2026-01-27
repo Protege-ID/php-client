@@ -60,7 +60,9 @@ Run the PHPCS code style checks:
 Run the PHPStan static analysis:
 
 ```bash
-vendor/bin/phpstan analyse src tests --level 5
+vendor/bin/phpstan analyse
+```
+
 ```
 
 ## License
