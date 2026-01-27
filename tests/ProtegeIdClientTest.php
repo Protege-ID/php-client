@@ -23,7 +23,10 @@ class ProtegeIdClientTest extends TestCase
     {
         $mock = new MockHandler($responses);
         $handlerStack = HandlerStack::create($mock);
-        return new GuzzleClient(['handler' => $handlerStack]);
+        return new GuzzleClient([
+            'handler' => $handlerStack,
+            'http_errors' => false,
+        ]);
     }
 
     // ==================== CONSTRUCTOR TESTS ====================
@@ -123,14 +126,14 @@ class ProtegeIdClientTest extends TestCase
     {
         $mockClient = $this->createMockClient([
             new Response(400, [], (string) json_encode([
-                'message' => 'Invalid user_ref format'
+                'message' => 'Validation error'
             ]))
         ]);
 
         $client = new ProtegeIdClient('valid-api-key', $mockClient);
 
         $this->expectException(ApiException::class);
-        $this->expectExceptionMessage('Invalid user_ref format');
+        $this->expectExceptionMessage('Validation error');
         $this->expectExceptionCode(400);
 
         $client->createSession('invalid-user');
