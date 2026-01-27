@@ -43,12 +43,24 @@ try {
 - `ProtegeId\Exceptions\ValidationException` for invalid method input.
 - `ProtegeId\Exceptions\ApiException` for API errors.
 
-## Testing
+## Testing and code quality
 
 Run the test suite:
 
 ```bash
 ./vendor/bin/phpunit
+```
+
+Run the PHPCS code style checks:
+
+```bash
+./vendor/bin/phpcs
+```
+
+Run the PHPStan static analysis:
+
+```bash
+vendor/bin/phpstan analyse src tests --level 5
 ```
 
 ## License

@@ -9,5 +9,6 @@ final class ProtegeIdSession
         public readonly string $temporaryUrl,
         public readonly string $userRef,
         public readonly ?string $expiresAt = null
-    ) {}
+    ) {
+    }
 }

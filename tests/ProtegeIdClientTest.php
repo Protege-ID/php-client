@@ -455,7 +455,6 @@ class ProtegeIdClientTest extends TestCase
 
             // Se for null, significa que Guzzle lançou exceção HTTP antes do nosso parseamento
             if ($actualErrorBody !== null) {
-                $this->assertIsArray($actualErrorBody);
                 $this->assertArrayHasKey('message', $actualErrorBody);
                 $this->assertEquals('Validation failed', $actualErrorBody['message']);
             }
@@ -479,10 +478,6 @@ class ProtegeIdClientTest extends TestCase
             $this->fail('Expected ApiException was not thrown');
         } catch (ApiException $e) {
             $actualErrorBody = $e->getErrorBody();
-
-            if ($actualErrorBody !== null) {
-                $this->assertIsArray($actualErrorBody);
-            }
 
             $this->assertEquals(500, $e->getCode());
         }

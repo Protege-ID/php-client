@@ -10,5 +10,6 @@ final class ProtegeIdVerificationResult
         public readonly string $userRef,
         public readonly ProtegeIdVerificationStatus $status,
         public readonly ?bool $ageVerified = null
-    ) {}
+    ) {
+    }
 }
