@@ -8,5 +8,6 @@ final class ProtegeIdVerificationResult
         public string $userRef,
         public string $status,
         public ?bool $ageVerified = null
-    ) {}
+    ) {
+    }
 }

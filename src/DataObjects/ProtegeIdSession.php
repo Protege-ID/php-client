@@ -9,5 +9,6 @@ final class ProtegeIdSession
         public string $temporaryUrl,
         public string $userRef,
         public ?string $expiresAt = null
-    ) {}
+    ) {
+    }
 }

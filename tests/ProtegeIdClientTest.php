@@ -23,7 +23,10 @@ class ProtegeIdClientTest extends TestCase
     {
         $mock = new MockHandler($responses);
         $handlerStack = HandlerStack::create($mock);
-        return new GuzzleClient(['handler' => $handlerStack]);
+        return new GuzzleClient([
+            'handler' => $handlerStack,
+            'http_errors' => false,
+        ]);
     }
 
     // ==================== CONSTRUCTOR TESTS ====================
@@ -80,7 +83,7 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionSuccessWithMinimalData(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(201, [], json_encode([
+            new Response(201, [], (string) json_encode([
                 'sessionId' => 'sess_123456',
                 'temporaryUrl' => 'https://verify.protegeid.com/sess_123456',
                 'expiresAt' => '2026-01-26T23:59:59Z'
@@ -100,7 +103,7 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionSuccessWithAllData(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(201, [], json_encode([
+            new Response(201, [], (string) json_encode([
                 'sessionId' => 'sess_789',
                 'temporaryUrl' => 'https://verify.protegeid.com/sess_789',
                 'expiresAt' => '2026-01-27T12:00:00Z'
@@ -122,15 +125,15 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionThrowsExceptionOnBadRequest(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(400, [], json_encode([
-                'message' => 'Invalid user_ref format'
+            new Response(400, [], (string) json_encode([
+                'message' => 'Validation error'
             ]))
         ]);
 
         $client = new ProtegeIdClient('valid-api-key', $mockClient);
 
         $this->expectException(ApiException::class);
-        $this->expectExceptionMessage('Invalid user_ref format');
+        $this->expectExceptionMessage('Validation error');
         $this->expectExceptionCode(400);
 
         $client->createSession('invalid-user');
@@ -139,7 +142,7 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionThrowsExceptionWhenMissingSessionId(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(201, [], json_encode([
+            new Response(201, [], (string) json_encode([
                 'temporaryUrl' => 'https://verify.protegeid.com/sess_999'
             ]))
         ]);
@@ -155,7 +158,7 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionThrowsExceptionWhenMissingTemporaryUrl(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(201, [], json_encode([
+            new Response(201, [], (string) json_encode([
                 'sessionId' => 'sess_999'
             ]))
         ]);
@@ -171,7 +174,7 @@ class ProtegeIdClientTest extends TestCase
     public function testCreateSessionThrowsExceptionOnUnexpectedStatusCode(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(500, [], json_encode([
+            new Response(500, [], (string) json_encode([
                 'error' => 'Internal server error'
             ]))
         ]);
@@ -199,7 +202,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionSuccessWithPendingStatus(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => [
                     [
                         'user_ref' => 'user-123',
@@ -222,7 +225,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionSuccessWithSuccessStatus(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => [
                     [
                         'user_ref' => 'user-456',
@@ -245,7 +248,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionSuccessWithFailedStatus(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => [
                     [
                         'user_ref' => 'user-789',
@@ -277,7 +280,7 @@ class ProtegeIdClientTest extends TestCase
 
         foreach ($statuses as $apiStatus => $enumStatus) {
             $mockClient = $this->createMockClient([
-                new Response(200, [], json_encode([
+                new Response(200, [], (string) json_encode([
                     'data' => [
                         [
                             'user_ref' => 'user-test',
@@ -298,7 +301,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionThrowsExceptionWhenDataArrayIsEmpty(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => []
             ]))
         ]);
@@ -314,7 +317,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionThrowsExceptionWhenDataIsMissing(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([]))
+            new Response(200, [], (string) json_encode([]))
         ]);
 
         $client = new ProtegeIdClient('valid-api-key', $mockClient);
@@ -328,7 +331,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionThrowsExceptionWhenUserRefIsMissing(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => [
                     [
                         'status' => 'pending'
@@ -348,7 +351,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionThrowsExceptionWhenStatusIsUnknown(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(200, [], json_encode([
+            new Response(200, [], (string) json_encode([
                 'data' => [
                     [
                         'user_ref' => 'user-123',
@@ -369,7 +372,7 @@ class ProtegeIdClientTest extends TestCase
     public function testVerifySessionThrowsExceptionOnUnexpectedStatusCode(): void
     {
         $mockClient = $this->createMockClient([
-            new Response(404, [], json_encode([
+            new Response(404, [], (string) json_encode([
                 'error' => 'Not found'
             ]))
         ]);
@@ -442,7 +445,7 @@ class ProtegeIdClientTest extends TestCase
         ];
 
         $mockClient = $this->createMockClient([
-            new Response(400, [], json_encode($errorBody))
+            new Response(400, [], (string) json_encode($errorBody))
         ]);
 
         $client = new ProtegeIdClient('valid-api-key', $mockClient);
@@ -455,7 +458,6 @@ class ProtegeIdClientTest extends TestCase
 
             // Se for null, significa que Guzzle lançou exceção HTTP antes do nosso parseamento
             if ($actualErrorBody !== null) {
-                $this->assertIsArray($actualErrorBody);
                 $this->assertArrayHasKey('message', $actualErrorBody);
                 $this->assertEquals('Validation failed', $actualErrorBody['message']);
             }
@@ -469,7 +471,7 @@ class ProtegeIdClientTest extends TestCase
         $errorBody = ['error' => 'Internal server error'];
 
         $mockClient = $this->createMockClient([
-            new Response(500, [], json_encode($errorBody))
+            new Response(500, [], (string) json_encode($errorBody))
         ]);
 
         $client = new ProtegeIdClient('valid-api-key', $mockClient);
@@ -479,10 +481,6 @@ class ProtegeIdClientTest extends TestCase
             $this->fail('Expected ApiException was not thrown');
         } catch (ApiException $e) {
             $actualErrorBody = $e->getErrorBody();
-
-            if ($actualErrorBody !== null) {
-                $this->assertIsArray($actualErrorBody);
-            }
 
             $this->assertEquals(500, $e->getCode());
         }

@@ -169,22 +169,38 @@ final class ProtegeIdClient
         $responseData = $this->decodeResponse($response);
 
         if ($statusCode !== HttpStatusCodes::OK) {
-            throw new ApiException('Unexpected response status while fetching verification.', $statusCode, $responseData);
+            throw new ApiException(
+                'Unexpected response status while fetching verification.',
+                $statusCode,
+                $responseData
+            );
         }
 
         if (empty($responseData['data']) || !is_array($responseData['data'])) {
-            throw new ApiException('Response data is empty or invalid.', $statusCode, $responseData);
+            throw new ApiException(
+                'Response data is empty or invalid.',
+                $statusCode,
+                $responseData
+            );
         }
 
         $verificationData = $responseData['data'][0];
         $userRef = $verificationData['user_ref'] ?? null;
         if (empty($userRef)) {
-            throw new ApiException('Response missing user_ref.', $statusCode, $responseData);
+            throw new ApiException(
+                'Response missing user_ref.',
+                $statusCode,
+                $responseData
+            );
         }
 
         $status = ProtegeIdVerificationStatus::tryFrom($verificationData['status'] ?? '');
         if ($status === null) {
-            throw new ApiException('Response contains unknown status.', $statusCode, $responseData);
+            throw new ApiException(
+                'Response contains unknown status.',
+                $statusCode,
+                $responseData
+            );
         }
 
         return new ProtegeIdVerificationResult(
@@ -202,7 +218,7 @@ final class ProtegeIdClient
         }
 
         $data = json_decode($body, true);
-        if (json_last_error() !== JSON_ERROR_NONE ) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             throw new ApiException('Invalid JSON response: ' . json_last_error_msg());
         }
 

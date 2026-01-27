@@ -1,6 +1,10 @@
 # ProtegeId PHP SDK
-
 PHP SDK for integrating with the ProtegeId API (Age Verification).
+
+[![codecov](https://codecov.io/gh/Protege-ID/php-client/branch/main/graph/badge.svg)](https://codecov.io/gh/Protege-ID/php-client)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg)](https://phpstan.org/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://www.php.net/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Requirements
 
@@ -9,7 +13,7 @@ PHP SDK for integrating with the ProtegeId API (Age Verification).
 ## Installation
 
 ```bash
-composer require protegeid/php-client
+composer require protege-id/php-client
 ```
 
 ## Basic usage
@@ -43,13 +47,33 @@ try {
 - `ProtegeId\Exceptions\ValidationException` for invalid method input.
 - `ProtegeId\Exceptions\ApiException` for API errors.
 
-## Testing
+## Testing and code quality
 
 Run the test suite:
 
 ```bash
 ./vendor/bin/phpunit
 ```
+
+Run the PHPCS code style checks:
+
+```bash
+./vendor/bin/phpcs
+```
+
+Run the PHPStan static analysis:
+
+```bash
+vendor/bin/phpstan analyse
+```
+
+Generate code coverage (requires Xdebug or PCOV enabled):
+
+```bash
+composer test:coverage
+```
+
+The HTML report is generated in `build/coverage/`.
 
 ## License
 
@@ -62,4 +86,4 @@ For questions, issues, or to request an API key, please contact:
 **ProtegeId Sales Team**
 Email: vendas@protegeid.com.br
 
-For bug reports and feature requests, please use the [GitHub Issues](https://github.com/protegeid/php-client/issues) page.
+For bug reports and feature requests, please use the [GitHub Issues](https://github.com/protege-id/php-client/issues) page.
