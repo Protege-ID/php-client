@@ -10,7 +10,12 @@
   "require-dev": {
     "phpunit/phpunit": "^10.5",
     "squizlabs/php_codesniffer": "^4.0",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "phpunit/php-code-coverage": "^10.1"
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit",
+    "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit -c phpunit.xml --coverage-html coverage --coverage-clover coverage/clover.xml"
   },
   "autoload": {
     "psr-4": {
