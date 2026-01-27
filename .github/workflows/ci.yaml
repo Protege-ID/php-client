@@ -22,7 +22,7 @@ jobs:
       - name: Prepare coverage output
         run: mkdir -p build/coverage
       - name: PHPUnit with coverage
-        run: composer coverage
+        run: composer test:coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
