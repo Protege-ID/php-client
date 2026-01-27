@@ -62,4 +62,4 @@ For questions, issues, or to request an API key, please contact:
 **ProtegeId Sales Team**
 Email: vendas@protegeid.com.br
 
-For bug reports and feature requests, please use the [GitHub Issues](https://github.com/protegeid/php-client/issues) page.
+For bug reports and feature requests, please use the [GitHub Issues](https://github.com/protege-id/php-client/issues) page.
