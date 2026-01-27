@@ -9,7 +9,7 @@ PHP SDK for integrating with the ProtegeId API (Age Verification).
 ## Installation
 
 ```bash
-composer require protegeid/php-client
+composer require protege-id/php-client
 ```
 
 ## Basic usage
