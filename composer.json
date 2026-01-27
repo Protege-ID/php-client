@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "./vendor/bin/phpunit",
-    "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit -c phpunit.xml --coverage-html coverage --coverage-clover coverage/clover.xml"
+    "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit -c phpunit.coverage.xml --coverage-html coverage --coverage-clover coverage/clover.xml"
   },
   "autoload": {
     "psr-4": {
