@@ -11,7 +11,7 @@
     "phpunit/phpunit": "^9.6",
     "squizlabs/php_codesniffer": "^4.0",
     "phpstan/phpstan": "^2.1",
-    "phpunit/php-code-coverage": "^10.1"
+    "phpunit/php-code-coverage": "^9.2"
   },
   "scripts": {
     "test": "./vendor/bin/phpunit",

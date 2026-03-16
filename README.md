@@ -5,7 +5,7 @@ PHP SDK for integrating with the ProtegeId API (Age Verification).
 
 [![codecov](https://codecov.io/gh/Protege-ID/php-client/branch/main/graph/badge.svg)](https://codecov.io/gh/Protege-ID/php-client)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg)](https://phpstan.org/)
-[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://www.php.net/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-blue.svg)](https://www.php.net/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Requirements

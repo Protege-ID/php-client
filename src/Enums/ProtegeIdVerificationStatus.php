@@ -2,7 +2,6 @@
 
 namespace ProtegeId\Enums;
 
-
 final class ProtegeIdVerificationStatus
 {
     public const PENDING = 'pending';
