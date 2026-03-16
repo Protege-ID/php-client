@@ -5,10 +5,10 @@ namespace ProtegeId\DataObjects;
 final class ProtegeIdSession
 {
     public function __construct(
-        public readonly string $sessionId,
-        public readonly string $temporaryUrl,
-        public readonly string $userRef,
-        public readonly ?string $expiresAt = null
+        public string $sessionId,
+        public string $temporaryUrl,
+        public string $userRef,
+        public ?string $expiresAt = null
     ) {
     }
 }
