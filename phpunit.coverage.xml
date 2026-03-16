@@ -7,16 +7,13 @@
     </testsuites>
 
     <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+
         <report>
             <html outputDirectory="build/coverage"/>
             <text outputFile="php://stdout"/>
         </report>
     </coverage>
-
-    <source>
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </source>
-    
 </phpunit>
